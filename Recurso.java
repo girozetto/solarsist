@@ -3,6 +3,8 @@ import java.awt.Color;
 import javax.imageio.*;
 import java.io.*;
 public class Recurso {
+    final private int MAXQUADRO = 50;
+
     private BufferedImage imagem;
     private boolean spritesheet;
     private int indice;
@@ -40,7 +42,8 @@ public class Recurso {
 
     public BufferedImage subImagem()
     {
-        return imagem.getSubimage( (indice = ( indice + 1) % ( (imagem.getWidth() / imagem.getHeight()) - 1 ) ), 0, imagem.getHeight(), imagem.getHeight());
+        indice = ( indice + 1) % ( (imagem.getWidth() / imagem.getHeight())*MAXQUADRO - 1 );
+        return imagem.getSubimage( (indice/MAXQUADRO) * imagem.getHeight(), 0, imagem.getHeight(), imagem.getHeight());
     }
 
     public boolean isSpritesheet() {

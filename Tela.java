@@ -23,11 +23,11 @@ public class Tela extends JPanel implements Runnable
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
         long inicio= System.nanoTime();
-        this.setBackground(Color.WHITE);
-        anima.dim = new int[]{getWidth(),getHeight()};
+        this.setBackground(Color.BLACK);
+        anima.dimTela = new int[]{getWidth(),getHeight()};
         anima.desenhar(g2d);
         long fim= System.nanoTime();
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(Color.WHITE);
         if(bugs){
             g2d.drawString("Tempo de Desenho: "+(fim-inicio)/1000000000.0+" segundos",0,0);
         }
