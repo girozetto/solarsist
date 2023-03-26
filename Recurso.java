@@ -39,7 +39,7 @@ public class Recurso {
 
         setImagem(img);
     }
-
+    
     public BufferedImage subImagem()
     {
         indice = ( indice + 1) % ( (imagem.getWidth() / imagem.getHeight())*MAXQUADRO - 1 );

@@ -20,8 +20,10 @@ public class Corpo {
         this.elasticidade = elasticidade;
         this.rotacao = rotacao;
     }
+    
+    public void mover(int altura, int largura) {
 
-    public void mover(int altura, int largura) {}
+    }
 
     public void desenhar(Graphics2D g){}
 
