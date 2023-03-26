@@ -5,6 +5,8 @@ public class Animacao{
     final private String SOL = "recursos/sol.png";
     final private String LUA = "recursos/lua.png";
     final private String FUNDO = "recursos/espaco2.png";
+    final private double VELOCIDADE_TRANS = 1;
+
     public int[] dimTela;
     private Recurso fundo;
     private Planeta sol;
@@ -27,7 +29,6 @@ public class Animacao{
     private void gerarElementos( int[][] dim , String[] nomes)
     {
         double centro = (this.sol.getAltura()/2)+20;
-        double transVelocidade = 1.5;
         double rotacaoVel = 0.07;
         Recurso[] op = new Recurso[dim.length];
         for(int i=0;i<op.length;i++)
@@ -37,7 +38,7 @@ public class Animacao{
         for( int i = 0 ; i < dim.length ; i++ ){
             Planeta p = new Planeta(0, 0, dim[i][0], centro , op[i]);
             p.gerarLuas( lua.getImagemRecurso(), dim[i][1] );
-            p.setTransVel( ( dim[i][2] / 100.0 ) * transVelocidade );
+            p.setTransVel( ( dim[i][2] / 100.0 ) * VELOCIDADE_TRANS );
             p.setRotVel(rotacaoVel += 0.06);
             p.setNome( nomes[i] );
             planetas.add( p );
