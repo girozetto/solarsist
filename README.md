@@ -2,7 +2,7 @@
 
 ## Description
 
-"Tela" is a java program that implements graphical animations using the Swing and AWT libraries. The program creates a window, adds a panel with animation capabilities to it, and starts a thread that constantly updates the animation frames.
+"SolarSist" is a java program that implements graphical animations using the Swing and AWT libraries. The program creates a window, adds a panel with animation capabilities to it, and starts a thread that constantly updates the animation frames.
 
 ## Usage
 

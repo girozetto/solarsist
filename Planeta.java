@@ -1,19 +1,22 @@
 import java.awt.*;
 
 public class Planeta extends Corpo{
-
+    final private int COR_NOME=0xFF1E88E5;
     private Recurso imagemRecurso;
     private double distCentro;
-    private Planeta[] luas;
+    private Planeta[] satelites;
     private String nome;
     
     public Planeta(double x, double y, int raio, double distCentro, Recurso imagem) {
         super(x, y,0,0,0,0,0);
+        setTranslacao(0);
+        setTransVel(0);
+        setRotVel(0);
         setNome("");
-        this.distCentro = distCentro;
-        this.imagemRecurso = imagem;
-        setAltura(raio);
-        setLargura(raio);
+        setDistCentro( distCentro );
+        setImagemRecurso( imagem );
+        setAltura( raio );
+        setLargura( raio );
     }
 
     public String getNome() {
@@ -26,15 +29,16 @@ public class Planeta extends Corpo{
 
     public void gerarLuas(Planeta lua, int num)
     {
-        luas = new Planeta[num];
+        satelites = new Planeta[num];
         double c = getAltura()/2;
-        for( int i = 0 ; i < luas.length ; i++ )
+        for( int i = 0 ; i < satelites.length ; i++ )
         {
             int raio = (int)(Math.random()*5+4);
             Planeta l = new Planeta(0, 0, raio, c += 1.7, lua.getImagemRecurso());
-            l.setAceleracao( (luas.length > 2 ? -1 : 1)*(Math.random() + 0.1));
+            l.setRotVel( (satelites.length > 2 ? -1 : 1) * (Math.random()*0.1 + 0.04));
+            l.setTransVel( (satelites.length > 2 ? -1 : 1) * (Math.random() + 0.1) );
             l.setNome("lua");
-            luas[i] = l;
+            satelites[i] = l;
         }
     }
 
@@ -56,25 +60,28 @@ public class Planeta extends Corpo{
 
     @Override
     public void desenhar(Graphics2D g) {
-        g.drawImage(imagemRecurso.isSpritesheet()?imagemRecurso.subImagem():imagemRecurso.getImagem(), (int) (getX()-getLargura()/2), (int) (getY()-getAltura()/2), (int) getLargura(), (int) getAltura(), null);
         Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setColor(new Color(0xFF1E88E5));
-        g2d.drawString(this.nome, (int)getX(), (int)getY());
-        if(luas != null)
-            for( Planeta p : luas )
-            {
-                p.orbitar(this);
-                p.desenhar(g2d);
-            }
+        g2d.rotate(Math.toRadians(getTranslacao()), getX(), getY());
+        g2d.drawImage(imagemRecurso.isSpritesheet()?imagemRecurso.subImagem():imagemRecurso.getImagem(), (int) (getX()-getLargura()/2), (int) (getY()-getAltura()/2), (int) getLargura(), (int) getAltura(), null);
         g2d.dispose();
+
+        g.setColor(new Color(COR_NOME));
+        g.drawString(this.nome, (int)getX(), (int)getY());
+        if(satelites != null)
+            for( Planeta sat : satelites )
+            {
+                sat.orbitar(this);
+                sat.desenhar(g);
+            }
     }
     
     public void orbitar(Planeta corpoCentral) {
-        double centroX = corpoCentral.getX();
-        double centroY = corpoCentral.getY();
-        
-        setRotacao( (getRotacao()>=360) ? 0 : getRotacao() + getAceleracao() );
-        setX( centroX + this.distCentro * Math.sin( Math.toRadians(getRotacao()) ));
-        setY( centroY + this.distCentro* Math.cos( Math.toRadians(getRotacao()) ));
+        double centroX = corpoCentral  != null ? corpoCentral.getX() : getX();
+        double centroY = corpoCentral != null ? corpoCentral.getY() : getY();
+
+        setRotacao( (getRotacao() >= 360) ? 0 : getRotacao() + getRotVel());
+        setTranslacao( (getTranslacao() >= 360) ? 0 : getTranslacao() + getTransVel() );
+        setX( centroX + this.distCentro * Math.sin( Math.toRadians( getTranslacao() ) ));
+        setY( centroY + this.distCentro * Math.cos( Math.toRadians( getTranslacao() ) ));
     }
 }

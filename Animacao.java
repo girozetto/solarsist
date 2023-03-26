@@ -14,30 +14,33 @@ public class Animacao{
     public Animacao() {
 
         dimTela = new int[2];
-        int[][] pldms = new int[][]{new int[]{18, 2, 70},new int[]{25, 2, 60} ,new int[]{32, 1, 40} ,new int[]{22, 1, 50} , new int[]{55, 9, 10} , new int[]{47, 7, 25} , new int[]{40, 9, 8}, new int[]{32, 4, 15}};
+        int[][] pldms = new int[][]{new int[]{15, 2, 70},new int[]{20, 2, 60} ,new int[]{27, 1, 40} ,new int[]{17, 1, 50} , new int[]{50, 9, 10} , new int[]{42, 7, 25} , new int[]{35, 9, 8}, new int[]{27, 4, 15}};
         String[] nomes = new String[]{"Mercurio","Venus","Terra","Marte","Jupiter","Saturno","Urano","Neptuno"};
         this.fundo = new Recurso(FUNDO);
         lua = new Planeta(0, 0, 5, 10, optimizarRecursos(new Color(0xFF008080), new Recurso(LUA))[0]);
         lua.getImagemRecurso().setSpritesheet(false);
         sol = new Planeta(0, 0, 85, 0, optimizarRecursos(new Color(0xFF008080), new Recurso(SOL))[0]);
         sol.setNome("Sol");
+        sol.setRotVel(0.04);
         gerarElementos( pldms, nomes);
     }
     
     private void gerarElementos( int[][] dim , String[] nomes)
     {
         double centro = (this.sol.getAltura()/2)+20;
-        double accel = 1.5;
+        double transVelocidade = 1.5;
+        double rotacaoVel = 0.07;
         Recurso[] op = new Recurso[dim.length];
         for(int i=0;i<op.length;i++)
             op[i]=new Recurso("recursos/pln"+(i)+".png");
         op = optimizarRecursos( new Color(0xFF008080), op);
         
         for( int i = 0 ; i < dim.length ; i++ ){
-            Planeta p = new Planeta(0, 0, dim[i][0], centro += 25 , op[i]);
-            p.setAceleracao( ( dim[i][2] / 100.0 ) * accel );
-            p.setNome( nomes[i] );
+            Planeta p = new Planeta(0, 0, dim[i][0], centro += 30 , op[i]);
             p.gerarLuas( lua, dim[i][1] );
+            p.setTransVel( ( dim[i][2] / 100.0 ) * transVelocidade );
+            p.setRotVel(rotacaoVel += 0.06);
+            p.setNome( nomes[i] );
             planetas.add( p );
         }
     }

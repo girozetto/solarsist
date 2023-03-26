@@ -9,6 +9,9 @@ public class Corpo {
     private double aceleracao;
     private double elasticidade;
     private double rotacao;
+    private double translacao;
+    private double transVel;
+    private double rotVel;
 
     public Corpo(double x, double y, double velx, double vely, double aceleracao, double elasticidade, double rotacao) {
         this.altura = this.largura = 1;
@@ -103,4 +106,31 @@ public class Corpo {
     public void setRotacao(double rotacao) {
         this.rotacao = rotacao;
     }
+
+    public double getTranslacao() {
+        return translacao;
+    }
+
+    public void setTranslacao(double translacao) {
+        this.translacao = translacao;
+    }
+
+    
+    public double getRotVel() {
+        return rotVel;
+    }
+
+    public void setRotVel(double rotVel) {
+        this.rotVel = rotVel;
+    }
+
+    public double getTransVel() {
+        return transVel;
+    }
+
+    public void setTransVel(double transVel) {
+        this.transVel = transVel;
+    }
+
+
 }
