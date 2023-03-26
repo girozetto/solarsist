@@ -29,7 +29,7 @@ public class Tela extends JPanel implements Runnable
         long fim= System.nanoTime();
         g2d.setColor(Color.WHITE);
         if(bugs){
-            g2d.drawString("Tempo de Desenho: "+(fim-inicio)/1000000000.0+" segundos",0,0);
+            g2d.drawString("Tempo de Desenho: "+(fim-inicio)/1000000000.0+" segundos",0,anima.dimTela[1]-10);
         }
     }
 

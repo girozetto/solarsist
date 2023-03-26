@@ -27,14 +27,14 @@ public class Planeta extends Corpo{
         this.nome = nome;
     }
 
-    public void gerarLuas(Planeta lua, int num)
+    public void gerarLuas(Recurso rec, int num)
     {
         satelites = new Planeta[num];
         double c = getAltura()/2;
         for( int i = 0 ; i < satelites.length ; i++ )
         {
             int raio = (int)(Math.random()*5+4);
-            Planeta l = new Planeta(0, 0, raio, c += 1.7, lua.getImagemRecurso());
+            Planeta l = new Planeta(0, 0, raio, c += 1.7, rec);
             l.setRotVel( (satelites.length > 2 ? -1 : 1) * (Math.random()*0.1 + 0.04));
             l.setTransVel( (satelites.length > 2 ? -1 : 1) * (Math.random() + 0.1) );
             l.setNome("lua");
@@ -76,8 +76,8 @@ public class Planeta extends Corpo{
     }
     
     public void orbitar(Planeta corpoCentral) {
-        double centroX = corpoCentral  != null ? corpoCentral.getX() : getX();
-        double centroY = corpoCentral != null ? corpoCentral.getY() : getY();
+        double centroX = corpoCentral.getX();
+        double centroY = corpoCentral.getY();
 
         setRotacao( (getRotacao() >= 360) ? 0 : getRotacao() + getRotVel());
         setTranslacao( (getTranslacao() >= 360) ? 0 : getTranslacao() + getTransVel() );
