@@ -56,7 +56,7 @@ public class Planeta extends Corpo{
 
     @Override
     public void desenhar(Graphics2D g) {
-        g.drawImage(imagemRecurso.isSpritesheet()?imagemRecurso.subImagem():imagemRecurso.getImagem(), (int) getX(), (int) getY(), (int) getLargura(), (int) getAltura(), null);
+        g.drawImage(imagemRecurso.isSpritesheet()?imagemRecurso.subImagem():imagemRecurso.getImagem(), (int) (getX()-getLargura()/2), (int) (getY()-getAltura()/2), (int) getLargura(), (int) getAltura(), null);
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setColor(new Color(0xFF1E88E5));
         g2d.drawString(this.nome, (int)getX(), (int)getY());
@@ -70,10 +70,11 @@ public class Planeta extends Corpo{
     }
     
     public void orbitar(Planeta corpoCentral) {
-        double centroX = corpoCentral.getX()+corpoCentral.getLargura()/2;
-        double centroY = corpoCentral.getY()+corpoCentral.getAltura()/2;
-        setRotacao( getRotacao() + getAceleracao() );
-        setX( centroX + (this.distCentro + getLargura()/2) * Math.sin( Math.toRadians(getRotacao()) ));
-        setY( centroY + (this.distCentro + getAltura()/2) * Math.cos( Math.toRadians(getRotacao()) ));
+        double centroX = corpoCentral.getX();
+        double centroY = corpoCentral.getY();
+        
+        setRotacao( (getRotacao()>=360) ? 0 : getRotacao() + getAceleracao() );
+        setX( centroX + this.distCentro * Math.sin( Math.toRadians(getRotacao()) ));
+        setY( centroY + this.distCentro* Math.cos( Math.toRadians(getRotacao()) ));
     }
 }
