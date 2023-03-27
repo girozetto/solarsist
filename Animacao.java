@@ -6,6 +6,9 @@ public class Animacao{
     final private String LUA = "recursos/lua.png";
     final private String FUNDO = "recursos/espaco2.png";
     final private double VELOCIDADE_TRANS = 1;
+	final private int[][] pldms = new int[][]{new int[]{15, 2, 55},new int[]{20, 2, 45} ,new int[]{27, 1, 30} ,new int[]{17, 1, 40} , new int[]{50, 9, 10} , new int[]{42, 7, 25} , new int[]{35, 9, 8}, new int[]{27, 4, 15}};
+	final private String[] nomes = new String[]{"Mercurio","Venus","Terra","Marte","Jupiter","Saturno","Urano","Neptuno"};
+        
 
     public int[] dimTela;
     private Recurso fundo;
@@ -15,8 +18,6 @@ public class Animacao{
     public Animacao() {
 
         dimTela = new int[2];
-        int[][] pldms = new int[][]{new int[]{15, 2, 55},new int[]{20, 2, 45} ,new int[]{27, 1, 30} ,new int[]{17, 1, 40} , new int[]{50, 9, 10} , new int[]{42, 7, 25} , new int[]{35, 9, 8}, new int[]{27, 4, 15}};
-        String[] nomes = new String[]{"Mercurio","Venus","Terra","Marte","Jupiter","Saturno","Urano","Neptuno"};
         this.fundo = new Recurso(FUNDO);
         lua = new Planeta(0, 0, 5, 10, optimizarRecursos(new Color(0xFF008080), new Recurso(LUA))[0]);
         lua.getImagemRecurso().setSpritesheet(false);
