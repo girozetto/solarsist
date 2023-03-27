@@ -37,13 +37,13 @@ public class Animacao{
         op = optimizarRecursos( new Color(0xFF008080), op);
         
         for( int i = 0 ; i < dim.length ; i++ ){
-            Planeta p = new Planeta(0, 0, dim[i][0], centro , op[i]);
+            Planeta p = new Planeta(0, 0, dim[i][0], centro + dim[i][0]/2 , op[i]);
             p.gerarLuas( lua.getImagemRecurso(), dim[i][1] );
             p.setTransVel( ( dim[i][2] / 100.0 ) * VELOCIDADE_TRANS );
             p.setRotVel(rotacaoVel += 0.06);
             p.setNome( nomes[i] );
             planetas.add( p );
-            centro += dim[i][0]*2;
+            centro += dim[i][0];
         }
     }
     
