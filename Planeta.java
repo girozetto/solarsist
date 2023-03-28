@@ -31,12 +31,13 @@ public class Planeta extends Corpo{
     {
         satelites = new Planeta[num];
         double c = getAltura()/2;
+        int sentido = 1;
         for( int i = 0 ; i < satelites.length ; i++ )
         {
             int raio = (int)(Math.random()*5+4);
             Planeta l = new Planeta(0, 0, raio, c += 1.7, rec);
-            l.setRotVel( (satelites.length > 2 ? -1 : 1) * (Math.random()*0.1 + 0.04));
-            l.setTransVel( (satelites.length > 2 ? -1 : 1) * (Math.random() + 0.1) );
+            l.setRotVel( (sentido*=-1) * (Math.random()*0.1 + 0.04));
+            l.setTransVel( sentido * (Math.random() + 0.1) );
             l.setNome("lua");
             satelites[i] = l;
         }
